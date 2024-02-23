@@ -10,8 +10,9 @@ dependencies:
   - py-opencv
   - ultralytics
   - ipykernel
-  - pytorch
-  - torchvision
-  - pytorch-cuda
+  - pytorch=2.2
+  - torchvision=0.17
+  - pytorch-cuda=12.1
   - pyrealsense2
   - dill
+  - libpng
