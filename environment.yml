@@ -3,4 +3,7 @@ channels:
   - conda-forge
   - nodefaults
 dependencies:
+  - python=3.12.1
+  - opencv=4.9.0
+  - py-opencv=4.9.0
   - ultralytics=8.1.16
