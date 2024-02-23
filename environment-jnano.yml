@@ -7,5 +7,6 @@ dependencies:
   - opencv
   - py-opencv
   - ultralytics
-  - ipykernel
+  - jupyter
+  - pyrealsense2
   - dill

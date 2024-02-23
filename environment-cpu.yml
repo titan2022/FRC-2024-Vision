@@ -12,4 +12,5 @@ dependencies:
   - pytorch
   - torchvision
   - cpuonly
+  - pyrealsense2
   - dill

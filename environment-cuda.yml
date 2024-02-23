@@ -13,4 +13,5 @@ dependencies:
   - pytorch
   - torchvision
   - pytorch-cuda
+  - pyrealsense2
   - dill
