@@ -1,0 +1,15 @@
+name: FRC-2024-Vision
+channels:
+  - conda-forge
+  - nodefaults
+  - pytorch
+dependencies:
+  - python
+  - opencv
+  - py-opencv
+  - ultralytics
+  - ipykernel
+  - pytorch
+  - torchvision
+  - cpuonly
+  - dill

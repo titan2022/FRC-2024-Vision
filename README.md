@@ -25,7 +25,7 @@ conda config --set auto_activate_base false
 Now, you can use Conda to install the dependencies.
 
 ```bash
-conda env create -f environment.yml
+conda env create -f environment-cpu.yml # or -cuda -intel -jnano
 conda activate FRC-2024-Vision
 ```
 
@@ -39,5 +39,5 @@ conda activate FRC-2024-Vision
 If you modify `environment.yml`, please run
 
 ```bash
-conda env update -f environment.yml
+conda env update -f environment-cpu.yml
 ```
