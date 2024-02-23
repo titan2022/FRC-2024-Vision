@@ -1,0 +1,6 @@
+name: FRC-2024-Vision
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - ultralytics=8.1.16
