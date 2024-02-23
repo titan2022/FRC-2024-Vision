@@ -1,0 +1,12 @@
+name: FRC-2024-Vision
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python
+  - opencv
+  - py-opencv
+  - ultralytics
+  - jupyter
+  - pyrealsense2
+  - dill
