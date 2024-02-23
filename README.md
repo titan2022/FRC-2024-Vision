@@ -29,6 +29,13 @@ conda env create -f environment.yml
 conda activate FRC-2024-Vision
 ```
 
+(This might not be necessary) Install a OpenCL implementation.
+* If you already have an OpenCL implementation, `conda install ocl-icd-system`
+* On the Jetson Nano:
+  * TODO
+* On any system with CUDA, `conda install pocl-cuda`
+* On an Intel GPU, `conda install intel-compute-runtime`
+
 If you modify `environment.yml`, please run
 
 ```bash

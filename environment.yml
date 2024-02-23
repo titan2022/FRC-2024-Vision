@@ -7,3 +7,4 @@ dependencies:
   - opencv=4.9.0
   - py-opencv=4.9.0
   - ultralytics=8.1.16
+  - jupyter=1.0.0
