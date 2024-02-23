@@ -2,9 +2,16 @@ name: FRC-2024-Vision
 channels:
   - conda-forge
   - nodefaults
+  - pytorch
+  - nvidia
 dependencies:
-  - python=3.12.1
-  - opencv=4.9.0
-  - py-opencv=4.9.0
-  - ultralytics=8.1.16
-  - jupyter=1.0.0
+  - python
+  - opencv
+  - py-opencv
+  - ultralytics
+  - ipykernel
+  - pytorch
+  - torchvision
+  - pytorch-cuda
+  - pyrealsense2
+  - dill
