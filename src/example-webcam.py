@@ -15,7 +15,7 @@ while cap.isOpened():
     success, frame = cap.read()
     assert success
 
-    res = model.track(frame, persist=True)
+    res = model.track(frame, persist=True, conf=0.4)
     firstResult: ultralytics.engine.results.Results = res[0]
     annot_frame = firstResult.plot()
     boxes = firstResult.boxes.xyxy
