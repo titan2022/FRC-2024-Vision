@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Basic dependencies
+sudo add-apt-repository universe
 sudo apt update
-sudo apt -y install libopenblas-base libopenmpi-dev libomp-dev python3.8-venv python3.8-dev libjpeg-dev zlib1g-dev python3.8
+sudo apt -y install libopenblas-base libopenmpi-dev libomp-dev python3.8-venv python3.8-dev libjpeg-dev zlib1g-dev libopenmpi3 python3.8
 
 # Create a virtual environment
 mkdir -p ~/.venvs
@@ -22,6 +23,37 @@ pip install --upgrade pip
 
 wget https://github.com/ethanc8/titanian-repo/releases/download/opencv-4.9.0-jnano-py38/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl
 pip install ./opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl
+
+# Build PyTorch
+sudo apt install ninja-build git cmake libjpeg-dev libopenmpi-dev libomp-dev ccache libopenblas-dev libblas-dev libeigen3-dev clang-8
+pip install mock pillow testresources setuptools==58.3.0 scikit-build
+pip install --upgrade protobuf
+git clone -b titanian-erista --depth=1 --recursive https://github.com/ethanc8/pytorch.git
+cd pytorch
+pip install -r requirements.txt
+sudo ln -s /usr/lib/aarch64-linux-gnu/libcublas.so /usr/local/cuda/lib64/libcublas.so
+export BUILD_CAFFE2_OPS=OFF
+export USE_FBGEMM=OFF
+export USE_FAKELOWP=OFF
+export BUILD_TEST=OFF
+export USE_MKLDNN=OFF
+export USE_NNPACK=OFF
+export USE_XNNPACK=OFF
+export USE_QNNPACK=OFF
+export USE_PYTORCH_QNNPACK=OFF
+export USE_CUDA=ON
+export USE_CUDNN=ON
+export TORCH_CUDA_ARCH_LIST="5.3;6.2;7.2"
+export USE_NCCL=OFF
+export USE_SYSTEM_NCCL=OFF
+export USE_OPENCV=OFF
+export MAX_JOBS=4
+export PATH=/usr/lib/ccache:$PATH
+export CC=clang-8
+export CXX=clang++-8
+export CUDACXX=/usr/local/cuda/bin/nvcc
+python3 setup.py clean # clean previous build if it exists
+python3 setup.py bdist_wheel
 
 # Install PyTorch into the venv
 # Older binaries are available at https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048

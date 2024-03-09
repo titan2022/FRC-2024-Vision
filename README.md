@@ -1,6 +1,15 @@
 # FRC-2024-Vision
 Coprocessor code for 2024
 
+## Running the code
+
+First install the dependencies (as listed below), and build Titan-Processing in `../Titan-Processing`. Then, you can do:
+
+```bash
+cd src
+python3 example-webcam.py
+```
+
 ## Install dependencies
 
 ### Install conda/miniforge
