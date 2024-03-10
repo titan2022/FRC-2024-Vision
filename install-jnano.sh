@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# Make sure zram is enabled:
+#   wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/apps/More%20RAM/install | bash
+
 # Basic dependencies
 sudo add-apt-repository universe
 sudo apt update
-sudo apt -y install libopenblas-base libopenmpi-dev libomp-dev python3.8-venv python3.8-dev libjpeg-dev zlib1g-dev libopenmpi3 python3.8
+sudo apt -y install libopenblas-base libopenmpi-dev libomp-dev python3.8-venv python3.8-dev libjpeg-dev zlib1g-dev libopenmpi-dev python3.8 curl wget
+
+# Install a newer CMake
+# wget -qO- https://raw.githubusercontent.com/ethanc8/titanian-repo/master/installers/cmake-bionic-arm64.sh | bash
 
 # Create a virtual environment
 mkdir -p ~/.venvs

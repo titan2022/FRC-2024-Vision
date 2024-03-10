@@ -6,8 +6,8 @@ channels:
   - nvidia
 dependencies:
   - python
-  - opencv
-  - py-opencv
+  - opencv=4.8.1
+  - py-opencv=4.8.1
   - ultralytics
   - ipykernel
   - pytorch=2.2
