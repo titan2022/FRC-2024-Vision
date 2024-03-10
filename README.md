@@ -1,6 +1,24 @@
 # FRC-2024-Vision
 Coprocessor code for 2024
 
+## Cloning this repo
+
+This repository uses Git LFS.
+
+First, install Git LFS:
+
+```bash
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt install git-lfs
+git lfs install
+```
+
+Next, clone the repo:
+
+```bash
+git clone https://github.com/titan2022/FRC-2024-Vision
+```
+
 ## Running the code
 
 First install the dependencies (as listed below), and build Titan-Processing in `../Titan-Processing`. Then, you can do:

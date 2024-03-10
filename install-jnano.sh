@@ -30,53 +30,62 @@ pip install --upgrade pip
 wget https://github.com/ethanc8/titanian-repo/releases/download/opencv-4.9.0-jnano-py38/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl
 pip install ./opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl
 
-# Build PyTorch
-sudo apt install ninja-build git cmake libjpeg-dev libopenmpi-dev libomp-dev ccache libopenblas-dev libblas-dev libeigen3-dev clang-8
-pip install mock pillow testresources setuptools==58.3.0 scikit-build
-pip install --upgrade protobuf
-git clone -b titanian-erista --depth=1 --recursive https://github.com/ethanc8/pytorch.git
-cd pytorch
-pip install -r requirements.txt
-sudo ln -s /usr/lib/aarch64-linux-gnu/libcublas.so /usr/local/cuda/lib64/libcublas.so
-export BUILD_CAFFE2_OPS=OFF
-export USE_FBGEMM=OFF
-export USE_FAKELOWP=OFF
-export BUILD_TEST=OFF
-export USE_MKLDNN=OFF
-export USE_NNPACK=OFF
-export USE_XNNPACK=OFF
-export USE_QNNPACK=OFF
-export USE_PYTORCH_QNNPACK=OFF
-export USE_CUDA=ON
-export USE_CUDNN=ON
-export TORCH_CUDA_ARCH_LIST="5.3;6.2;7.2"
-export USE_NCCL=OFF
-export USE_SYSTEM_NCCL=OFF
-export USE_OPENCV=OFF
-export MAX_JOBS=4
-export PATH=/usr/lib/ccache:$PATH
-export CC=clang-8
-export CXX=clang++-8
-export CUDACXX=/usr/local/cuda/bin/nvcc
-python3 setup.py clean # clean previous build if it exists
-python3 setup.py bdist_wheel
+# # Build PyTorch
+# sudo apt install ninja-build git cmake libjpeg-dev libopenmpi-dev libomp-dev ccache libopenblas-dev libblas-dev libeigen3-dev clang-8
+# pip install mock pillow testresources setuptools==58.3.0 scikit-build
+# pip install --upgrade protobuf
+# git clone -b titanian-erista --depth=1 --recursive https://github.com/ethanc8/pytorch.git
+# cd pytorch
+# pip install -r requirements.txt
+# sudo ln -s /usr/lib/aarch64-linux-gnu/libcublas.so /usr/local/cuda/lib64/libcublas.so
+# export BUILD_CAFFE2_OPS=OFF
+# export USE_FBGEMM=OFF
+# export USE_FAKELOWP=OFF
+# export BUILD_TEST=OFF
+# export USE_MKLDNN=OFF
+# export USE_NNPACK=OFF
+# export USE_XNNPACK=OFF
+# export USE_QNNPACK=OFF
+# export USE_PYTORCH_QNNPACK=OFF
+# export USE_CUDA=ON
+# export USE_CUDNN=ON
+# export TORCH_CUDA_ARCH_LIST="5.3;6.2;7.2"
+# export USE_NCCL=OFF
+# export USE_SYSTEM_NCCL=OFF
+# export USE_OPENCV=OFF
+# export MAX_JOBS=4
+# export PATH=/usr/lib/ccache:$PATH
+# export CC=clang-8
+# export CXX=clang++-8
+# export CUDACXX=/usr/local/cuda/bin/nvcc
+# python3 setup.py clean # clean previous build if it exists
+# python3 setup.py bdist_wheel
+# pip install dist/torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl
+# pip install "Cython>=0.29.21,<3.0"
+# pip install numpy
+
+# Build and install torchvision
+git clone --branch v0.14.1 https://github.com/pytorch/vision torchvision
+cd torchvision
+pip install build "setuptools>=40.8.0"
+MAX_JOBS=3 python3 -m build --wheel --no-isolation
+# The wheel will be in dist/
+pip install ./dist/torchvision-*.whl
 
 # Install PyTorch into the venv
 # Older binaries are available at https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048
 # We can't get newer binaries as that would require a newer Python
-wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38/torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl -O torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl
-wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38/torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl -O torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl
+wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl -O torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl
+wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torchvision-0.14.1a0+5e8e2f1-cp38-cp38-linux_aarch64.whl -O torchvision-0.14.0a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
 # NumPy requires Cython>=0.29.21,<3.0
 pip install "Cython>=0.29.21,<3.0"
-pip install numpy ./torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./torchvision-0.14.0a0+5ce4506-cp38-cp38-linux_aarch64.whl
-
-# # Build and install torchvision
-# git clone --branch v0.11.1 https://github.com/pytorch/vision torchvision
-# cd torchvision
-# python3 -m pip install build "setuptools>=40.8.0"
-# MAX_JOBS=3 python3 -m build --wheel --no-isolation
-# # The wheel will be in dist/
-# python3 -m pip install ./dist/torchvision-*.whl
+pip install numpy ./torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./torchvision-0.14.0a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
 
 # Install ultralytics
-pip install ultralytics
+pip install ultralytics dill 'lapx>=0.5.2'
+
+# Install librealsense2
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
+sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
+sudo apt install librealsense2-utils librealsense2-dev
+pip install pyrealsense2
