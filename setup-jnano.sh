@@ -8,7 +8,7 @@ sudo apt -y install libopenblas-base libopenmpi-dev libomp-dev python3.8-venv py
 
 # Set up Git LFS and clone the repo
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-sudo apt install git-lfs
+sudo apt -y install git-lfs
 git lfs install
 pushd ~/Projects
   git clone https://github.com/titan2022/FRC-2024-Vision
@@ -40,7 +40,7 @@ pip install ultralytics dill 'lapx>=0.5.2'
 # Install librealsense2
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE || sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key F6E65AC044F831AC80A06380C8B3A55A6F3EFCDE
 sudo add-apt-repository "deb https://librealsense.intel.com/Debian/apt-repo $(lsb_release -cs) main" -u
-sudo apt install librealsense2-utils librealsense2-dev
+sudo apt -y install librealsense2-utils librealsense2-dev
 pip install pyrealsense2
 
 # Set up zram and reboot
