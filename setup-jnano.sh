@@ -31,9 +31,8 @@ wget https://github.com/ethanc8/titanian-repo/releases/download/opencv-4.9.0-jna
 pip install ./opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./opencv_python-4.9.0.80-py2.py3-none-any.whl
 
 # Install PyTorch into the venv
-wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl
-wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torchvision-0.14.1a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
-pip install ./torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./torchvision-0.14.0a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
+wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torchvision-0.14.1a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
+pip install ./torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl ./torchvision-0.14.1a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
 
 # Install ultralytics
 pip install ultralytics dill 'lapx>=0.5.2'
