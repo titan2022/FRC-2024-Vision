@@ -14,7 +14,8 @@ if ENABLE_TRBNETWORKING:
     import pathlib
     import TRBNetworking
 
-model = YOLO("YOLOv8sNO.pt")
+# model = YOLO("YOLOv8sNO.pt") # Small model
+model = YOLO("../yolov8n-note-only.pt") # Nano model
 
 # # D435
 # HFOV = 90
