@@ -7,6 +7,7 @@
 sudo add-apt-repository universe
 sudo apt update
 sudo apt -y install libopenblas-base libopenmpi-dev libomp-dev python3.8-venv python3.8-dev libjpeg-dev zlib1g-dev libopenmpi-dev python3.8 curl wget
+sudo apt -y install build-essential cmake git unzip pkg-config zlib1g-dev libjpeg-dev libjpeg8-dev libjpeg-turbo8-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libglew-dev libgtk2.0-dev libgtk-3-dev libcanberra-gtk* python3-dev python3-numpy python3-pip libxvidcore-dev libx264-dev libgtk-3-dev libtbb2 libtbb-dev libdc1394-22-dev libxine2-dev gstreamer1.0-tools libv4l-dev v4l-utils qv4l2  libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev libavresample-dev libvorbis-dev libxine2-dev libtesseract-dev libfaac-dev libmp3lame-dev libtheora-dev libpostproc-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenblas-dev libatlas-base-dev libblas-dev liblapack-dev liblapacke-dev libeigen3-dev gfortran libhdf5-dev protobuf-compiler libprotobuf-dev libgoogle-glog-dev libgflags-dev
 
 # Install a newer CMake
 # wget -qO- https://raw.githubusercontent.com/ethanc8/titanian-repo/master/installers/cmake-bionic-arm64.sh | bash
@@ -27,8 +28,8 @@ pip install --upgrade pip
 # export ENABLE_CONTRIB=1
 # pip wheel . --verbose
 
-wget https://github.com/ethanc8/titanian-repo/releases/download/opencv-4.9.0-jnano-py38/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl
-pip install ./opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl
+wget https://github.com/ethanc8/titanian-repo/releases/download/opencv-4.9.0-jnano-py38/opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl https://github.com/ethanc8/titanian-repo/releases/download/opencv-4.9.0-jnano-py38/opencv_python-4.9.0.80-py2.py3-none-any.whl
+pip install ./opencv_contrib_python-4.9.0.80-cp38-cp38-linux_aarch64.whl ./opencv_python-4.9.0.80-py2.py3-none-any.whl
 
 # # Build PyTorch
 # sudo apt install ninja-build git cmake libjpeg-dev libopenmpi-dev libomp-dev ccache libopenblas-dev libblas-dev libeigen3-dev clang-8
@@ -75,8 +76,8 @@ pip install ./dist/torchvision-*.whl
 # Install PyTorch into the venv
 # Older binaries are available at https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048
 # We can't get newer binaries as that would require a newer Python
-wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl -O torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl
-wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torchvision-0.14.1a0+5e8e2f1-cp38-cp38-linux_aarch64.whl -O torchvision-0.14.0a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
+wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torch-1.13.0a0+git7a7b8c9-cp38-cp38-linux_aarch64.whl
+wget https://github.com/ethanc8/titanian-repo/releases/download/pytorch-1.13.0-jnano-py38-bionic/torchvision-0.14.1a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
 # NumPy requires Cython>=0.29.21,<3.0
 pip install "Cython>=0.29.21,<3.0"
 pip install numpy ./torch-1.13.0a0+git7c98e70-cp38-cp38-linux_aarch64.whl ./torchvision-0.14.0a0+5e8e2f1-cp38-cp38-linux_aarch64.whl
