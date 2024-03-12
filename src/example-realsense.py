@@ -53,7 +53,7 @@ while True:
     #cv.cvtColor(color_im, cv.COLOR_RGB2BGR, color_im)
     depth_im = np.asanyarray(depth_frame.get_data())
 
-    results = model.track(processing_im, persist=True)
+    results = model.track(processing_im, persist=True, classes=["note"])
     firstResult: ultralytics.engine.results.Results = results[0]
     if ENABLE_IMSHOW:
         annotatedFrame = firstResult.plot()
@@ -80,9 +80,9 @@ while True:
         # print(((x1, y1), (x2, y2)))
         center_x = int((x1.item() + x2.item())/2)
         center_y = int((y1.item() + y2.item())/2)
-        center = (center_x, center_y)
-        # print(center)
         if ENABLE_IMSHOW:
+            center = (center_x, center_y)
+            # print(center)
             cv.circle(annotatedFrame, center, 7, (255, 0, 0), cv.FILLED) # Show circle
         # Let's do some depth stuff!
         hsv_frame = cv.cvtColor(color_im, cv.COLOR_BGR2HSV)
@@ -109,10 +109,11 @@ while True:
         cv.imshow("Tracking", annotatedFrame)
         cv.imshow("Depth", depth_im * 10)
 
-    # Quit if Q or ESC is pressed
-    keypress = cv.waitKey(1)
-    if keypress == ord('q') or keypress == 27:
-        break
+        # Quit if Q or ESC is pressed
+        keypress = cv.waitKey(1)
+        if keypress == ord('q') or keypress == 27:
+            break
 
-# cap.release()
-cv.destroyAllWindows()
+if ENABLE_IMSHOW:
+    # cap.release()
+    cv.destroyAllWindows()
