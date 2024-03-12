@@ -14,6 +14,8 @@ if ENABLE_TRBNETWORKING:
     import pathlib
     import TRBNetworking
 
+ENABLE_IMSHOW = False
+
 # model = YOLO("YOLOv8sNO.pt") # Small model
 model = YOLO("../yolov8n-note-only.pt") # Nano model
 
@@ -98,11 +100,12 @@ while True:
             # FIXME: We need to calculate the position of the note on the field.
             roboRIO.sendVector(b"note", TRBNetworking.Vector3D(center[0], center[1], 0))
 
-    # print(f"Mask: {mask}")
-    cv.imshow("HSV Mask", hsv_mask)
-    cv.imshow("Mask", mask)
-    cv.imshow("Tracking", annotatedFrame)
-    cv.imshow("Depth", depth_im * 10)
+    if ENABLE_IMSHOW:
+        # print(f"Mask: {mask}")
+        cv.imshow("HSV Mask", hsv_mask)
+        cv.imshow("Mask", mask)
+        cv.imshow("Tracking", annotatedFrame)
+        cv.imshow("Depth", depth_im * 10)
 
     # Quit if Q or ESC is pressed
     keypress = cv.waitKey(1)
