@@ -55,11 +55,12 @@ while True:
 
     results = model.track(processing_im, persist=True)
     firstResult: ultralytics.engine.results.Results = results[0]
-    annotatedFrame = firstResult.plot()
+    if ENABLE_IMSHOW:
+        annotatedFrame = firstResult.plot()
 
     # boxes = firstResult.boxes.xyxy
     boxes: torch.Tensor = firstResult.boxes.xyxy
-    print(type(boxes))
+    # print(type(boxes))
     if boxes.numel() > 0:
         x1, x2, y1, y2 = 0, 0, 0, 0
         def key(box):
@@ -75,13 +76,14 @@ while True:
     # for x1, y1, x2, y2 in boxes:
     if largestBox is not None:
         x1, y1, x2, y2 = largestBox
-        print(type(x1))
-        print(((x1, y1), (x2, y2)))
+        # print(type(x1))
+        # print(((x1, y1), (x2, y2)))
         center_x = int((x1.item() + x2.item())/2)
         center_y = int((y1.item() + y2.item())/2)
         center = (center_x, center_y)
-        print(center)
-        cv.circle(annotatedFrame, center, 7, (255, 0, 0), cv.FILLED) # Show circle
+        # print(center)
+        if ENABLE_IMSHOW:
+            cv.circle(annotatedFrame, center, 7, (255, 0, 0), cv.FILLED) # Show circle
         # Let's do some depth stuff!
         hsv_frame = cv.cvtColor(color_im, cv.COLOR_BGR2HSV)
         #             HUE     SATURAT VALUE
@@ -91,10 +93,10 @@ while True:
         hsv_mask = vf.hsv_filter(hsv_frame, thresholds)
         nonzero_mask = cv.inRange(depth_im, np.array([1]), np.array([65534]))
         mask = cv.bitwise_and(hsv_mask, nonzero_mask, mask=bb_mask)
-        depth = cv.mean(depth_im, hsv_mask)[0]
+        # depth = cv.mean(depth_im, hsv_mask)[0]
         note_z = cv.mean(depth_im, mask)[0]
-        print(f"Depth: {depth} | Sparse: {note_z}")
-
+        # print(f"Depth: {depth} | Sparse: {note_z}")
+        
 
         if ENABLE_TRBNETWORKING:
             # FIXME: We need to calculate the position of the note on the field.
