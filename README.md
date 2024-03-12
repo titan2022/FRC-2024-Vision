@@ -30,6 +30,14 @@ python3 example-webcam.py
 
 ## Install dependencies
 
+### Jetson Nano installation
+
+On a stock JetPack 4.6.1 / Ubuntu 18.04 installation, run:
+
+```bash
+wget -qO- https://raw.githubusercontent.com/titan2022/FRC-2024-Vision/main/setup-jnano.sh | bash
+```
+
 ### Install conda/miniforge
 
 First, please have Conda installed on your computer. If it's not installed, please install [Miniforge3](https://conda-forge.org/miniforge/), which includes Conda and a conda-forge based Python environment. You can install Miniforge3 using the following command:
