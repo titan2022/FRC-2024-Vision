@@ -34,6 +34,8 @@ First, please go into the Unity network settings, click "Edit Connections...", a
 
 Next, go into this directory and run `./autostart-jnano.sh` and reboot. To return to the desktop, run `./no-autostart-jnano.sh` and reboot.
 
+To see the status, run `systemctl status titan2022`. To see the full logs, run `journalctl -u titan2022 -b`.
+
 ## Install dependencies
 
 ### Jetson Nano installation
