@@ -16,7 +16,7 @@ After=network.target
 User=titan
 Type=simple
 ExecStart=/home/titan/Projects/FRC-2024-Vision/titan2022-service.sh
-Restart=on-failure
+Restart=always
 RestartSec=1
 KillMode=process
 
