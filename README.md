@@ -28,6 +28,12 @@ cd src
 python3 example-webcam.py
 ```
 
+## Autostart (Jetson Nano)
+
+First, please go into the Unity network settings, click "Edit Connections...", and for each network connection, edit the connection and select "General->All users may connect to this network".
+
+Next, go into this directory and run `./autostart-jnano.sh` and reboot. To return to the desktop, run `./no-autostart-jnano.sh` and reboot.
+
 ## Install dependencies
 
 ### Jetson Nano installation
