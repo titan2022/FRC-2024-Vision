@@ -9,7 +9,7 @@ import cv2 as cv
 import vision_functions as vf
 
 # Disable this unless Titan-Processing is built in ../Titan-Processing
-ENABLE_TRBNETWORKING = False
+ENABLE_TRBNETWORKING = True
 if ENABLE_TRBNETWORKING:
     import pathlib
     import TRBNetworking
@@ -39,7 +39,7 @@ sensor = pipe.get_active_profile().get_device().first_depth_sensor()
 sensor.set_option(rs.option.depth_units, 0.0001) # Set units to 0.0001 m = 0.1 mm = 100 µm
 
 if ENABLE_TRBNETWORKING:
-    libTitanProcessing = TRBNetworking.load_lib(pathlib.Path(__file__).parent.resolve() / ".." / ".." / "Titan-Processing" / "lib" / "libTitanProcessing.so")
+    libTitanProcessing = TRBNetworking.load_lib(pathlib.Path(__file__).parent.resolve() / ".." / ".." / "Titan-Processing" / "lib" / "libTRBNetworking.so")
     roboRIO = TRBNetworking.Client(libTitanProcessing, b"127.0.0.1", 5800)
 
 while True:
