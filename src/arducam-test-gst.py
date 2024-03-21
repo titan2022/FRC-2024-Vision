@@ -1,34 +1,23 @@
 import cv2
 
-# WORKING: cap = cv2.VideoCapture("shmsrc socket-path=/tmp/foo ! video/x-raw, format=BGR ,width=1920,height=1080,framerate=30/1 ! videoconvert ! video/x-raw, format=BGR ! appsink")
+cameraName = "usb-Arducam_Technology_Co.__Ltd._Arducam_OV9782_USB_Camera_UC852-video-index0"
 
-# Define the source as shared memory (shmsrc) and point to the socket. !
-# Set the caps (raw (not encoded) frame video/x-raw, format as BGR or RGB (opencv format of grabbed cameras)) and define the properties of the camera !
-# And sink the grabbed data to the appsink
-# cap = cv2.VideoCapture("shmsrc socket-path=/tmp/foo ! video/x-raw, format=BGR ,width=1920,height=1080,framerate=30/1 ! appsink")
-
-# print(cv2.getBuildInformation())
-
-## Update
-cap = cv2.VideoCapture("v4l2src device=/dev/v4l/by-id/usb-Arducam_Technology_Co.__Ltd._Arducam_OV9782_USB_Camera_UC852-video-index0 ! "
-                       "videorate ! videoconvert ! videoscale !"
-                       "video/x-raw, format=BGR, width=640, height=480, pixel-aspect-ratio=1/1, framerate=30/1 ! "
-                       "decodebin ! videoconvert ! appsink")
+cap = cv2.VideoCapture(f"v4l2src device=/dev/v4l/by-id/{cameraName} ! "
+                        "videorate ! videoconvert ! videoscale !"
+                        "video/x-raw, format=BGR, width=640, height=480, pixel-aspect-ratio=1/1, framerate=30/1 ! "
+                        "decodebin ! videoconvert ! appsink")
 
 if not cap.isOpened():
     print("Cannot capture from camera. Exiting.")
     quit()
 
-
 while True:
-
-    ret, frame = cap.read()
+    success, frame = cap.read()
     #
-    if ret == False:
+    if success == False:
         break
 
-
-    cv2.imshow("FrameREAD",frame)
+    cv2.imshow("Frame from Arducam",frame)
 
     framerate = cap.get(cv2.CAP_PROP_FPS)
     print(f"Framerate: {framerate} frames/s")
@@ -38,8 +27,5 @@ while True:
     if keypress == ESCAPE:
         break
 
-# gst-launch-1.0 v4l2src ! x264enc ! shmsink socket-path=/tmp/foo sync=true wait-for-connection=false shm-size=10000000
-
-# gst-launch-1.0 shmsrc socket-path=/tmp/foo ! h264parse ! avdec_h264 ! videoconvert ! ximagesink
-
-# gst-launch-1.0 shmsrc socket-path=/tmp/foo ! video/x-raw, format=BGR ,width=1920,height=1080,framerate=30/1 ! videoconvert ! ximagesink
+cap.release()
+cv2.destroyAllWindows()
